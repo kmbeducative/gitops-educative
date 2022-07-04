@@ -1,6 +1,6 @@
 
 cd /usercode
-mv ignore .gitignore
+mv conf .gitignore
 export GH_TOKEN={{GITHUB_PAT}}
 git config --global credential.helper store
 git config --global user.email "student@educative.com"
