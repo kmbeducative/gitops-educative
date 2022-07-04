@@ -1,5 +1,5 @@
 
-cd /usercode
+cd /usercode/system
 mv conf .gitignore
 
 export GH_TOKEN={{GITHUB_PAT}}
@@ -18,8 +18,10 @@ git add .
 git commit -m "Remaining lesson files"
 git branch -m main
 
-gh repo delete usercode --confirm
-gh repo create usercode --public -s $(pwd) --push
+gh repo delete system --confirm
+gh repo create system --public -s $(pwd) --push
+
+cd /usercode
 
 flux bootstrap github \
   --owner=$GITHUB_USER \
@@ -28,4 +30,24 @@ flux bootstrap github \
   --path=./educative-cluster \
   --personal
 
-  git clone https://github.com/$GITHUB_USER/flux-infra
+git clone https://github.com/$GITHUB_USER/flux-infra
+
+cd /usercode/flux-infra
+
+flux create source git podinfo \
+  --url=https://github.com/{{GITHUB_USERNAME}}/system \
+  --branch=main \
+  --interval=30s \
+  --path=infrastructure \
+  --export > ./flux-cluster/podinfo-source.yaml
+
+git add -A && git commit -m "Add podinfo GitRepository"
+git push
+
+flux create kustomization podinfo \
+  --target-namespace=default \
+  --source=podinfo \
+  --path="./kustomize" \
+  --prune=true \
+  --interval=5m \
+  --export > ./flux-cluster/podinfo-kustomization.yaml
