@@ -38,7 +38,6 @@ flux create source git podinfo \
   --url=https://github.com/{{GITHUB_USERNAME}}/system \
   --branch=main \
   --interval=30s \
-  --path=infrastructure \
   --export > ./educative-cluster/podinfo-source.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
@@ -47,7 +46,7 @@ git push
 flux create kustomization podinfo \
   --target-namespace=default \
   --source=podinfo \
-  --path="./kustomize" \
+  --path="./infrastructure" \
   --prune=true \
   --interval=5m \
   --export > ./educative-cluster/podinfo-kustomization.yaml
