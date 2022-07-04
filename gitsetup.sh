@@ -39,7 +39,7 @@ flux create source git podinfo \
   --branch=main \
   --interval=30s \
   --path=infrastructure \
-  --export > ./flux-infra/educative-cluster/podinfo-source.yaml
+  --export > ./educative-cluster/podinfo-source.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
 git push
@@ -50,7 +50,7 @@ flux create kustomization podinfo \
   --path="./kustomize" \
   --prune=true \
   --interval=5m \
-  --export > ./flux-infra/educative-cluster/podinfo-kustomization.yaml
+  --export > ./educative-cluster/podinfo-kustomization.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
 git push
