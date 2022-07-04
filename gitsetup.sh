@@ -10,4 +10,4 @@ git branch -m main
 git add .
 git commit -m "Lesson started"
 gh repo delete usercode
-gh repo create usercode --public -s $(pwd)
+gh repo create usercode --public -s $(pwd) --push
