@@ -1,5 +1,5 @@
 
-cd /usercode
+cd /usercode/system
 mv conf .gitignore
 export GH_TOKEN={{GITHUB_PAT}}
 git config --global credential.helper store
@@ -13,5 +13,5 @@ git add .
 git commit -m "Remaining lesson files"
 git branch -m main
 
-gh repo delete usercode --confirm
-gh repo create usercode --public -s $(pwd) --push
+gh repo delete system --confirm
+gh repo create system --public -s $(pwd) --push
