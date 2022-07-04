@@ -1,5 +1,6 @@
 
 cd /usercode
+mv ignore .gitignore
 export GH_TOKEN={{GITHUB_PAT}}
 git config --global credential.helper store
 git config --global user.email "student@educative.com"
@@ -12,5 +13,6 @@ git commit -m "Lesson started"
 git add .
 git commit -m "Remaining lesson files"
 
-gh repo delete usercode
+gh auth login
+gh repo delete usercode --confirm
 gh repo create usercode --public -s $(pwd) --push
