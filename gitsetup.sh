@@ -5,7 +5,7 @@ export GH_TOKEN={{GITHUB_PAT}}
 git config --global credential.helper store
 git config --global user.email "student@educative.com"
 git config --global user.name "Educative Student"
-echo "https://{{GITHUB_USERNAME}}:{{GITHUB_PAT}}@github.com" >> ~/.gitcredentials
+echo "https://{{GITHUB_USERNAME}}:{{GITHUB_PAT}}@github.com" >> ~/.git-credentials
 git init
 git branch -m main
 git add .gitignore
