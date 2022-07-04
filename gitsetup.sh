@@ -7,11 +7,11 @@ git config --global user.email "student@educative.com"
 git config --global user.name "Educative Student"
 echo "https://{{GITHUB_USERNAME}}:{{GITHUB_PAT}}@github.com" >> ~/.git-credentials
 git init
-git branch -m main
 git add .gitignore
 git commit -m "Lesson started"
 git add .
 git commit -m "Remaining lesson files"
+git branch -m main
 
 gh repo delete usercode --confirm
 gh repo create usercode --public -s $(pwd) --push
