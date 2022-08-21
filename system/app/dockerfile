@@ -1,0 +1,17 @@
+# Base Image
+FROM python:3.8-slim-buster
+
+# Specify the working directory
+WORKDIR /app
+
+# Copy the file from the local directory to the container
+COPY requirements.txt requirements.txt
+
+RUN pip3 install -q -r requirements.txt
+
+# Copy the content of the current directory on the file system into 
+# the current directory on the container image.
+COPY . . 
+
+# Start the application and listen on all IPs
+CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
