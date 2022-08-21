@@ -5,8 +5,8 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: python-sample # Label pods must match to recieve service traffic
+    app: python-sample # Label pods must match to receive service traffic
   ports:
-    - port: 8080 # Port to recieve service traffic
+    - port: 8080 # Port to receive service traffic
       targetPort: 5000 # Port to send traffic to pod
-      nodePort: 30000 # Port to recieve traffic on cluster node
+      nodePort: 30000 # Port to receive traffic on cluster node
