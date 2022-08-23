@@ -24,3 +24,14 @@ gh repo create system --public -s $(pwd) --push
 cd /usercode
 
 gh repo delete flux-infra --confirm
+
+flux bootstrap github \
+  --owner=$GITHUB_USER \
+  --repository=flux-infra \
+  --branch=main \
+  --path=./educative-cluster \
+  --personal
+
+git clone https://github.com/$GITHUB_USER/flux-infra
+
+cd /usercode/flux-infra
