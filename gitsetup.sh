@@ -35,3 +35,14 @@ flux bootstrap github \
 git clone https://github.com/$GITHUB_USER/flux-infra
 
 cd /usercode/flux-infra
+
+flux create source git example-source \
+  --url=https://github.com/[GITHUB_USERNAME]/system \
+  --branch=main \
+  --interval=30s \
+  --namespace=flux-system \
+  --export > ./educative-cluster/python-sample-source.yaml
+
+git add .
+git commit -m "Adding the GitRepository"
+git push
