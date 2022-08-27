@@ -37,7 +37,7 @@ git clone https://github.com/$GITHUB_USER/flux-infra
 cd /usercode/flux-infra
 
 flux create source git example-source \
-  --url=https://github.com/[GITHUB_USERNAME]/system \
+  --url=https://github.com/$GITHUB_USER/system \
   --branch=main \
   --interval=30s \
   --namespace=flux-system \
