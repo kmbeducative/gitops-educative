@@ -46,3 +46,15 @@ flux create source git example-source \
 git add .
 git commit -m "Adding the GitRepository"
 git push
+
+flux create kustomization example-kustomization \
+  --target-namespace=default \
+  --source=example-source \
+  --path="./infrastructure" \
+  --prune=true \
+  --interval=5m \
+  --export > ./educative-cluster/python-sample-kustomization.yaml
+
+git add .
+git commit -m "Adding kustomization"
+git push
