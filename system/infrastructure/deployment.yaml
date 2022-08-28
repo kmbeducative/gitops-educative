@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: python-sample
-        image: kmbeducative/python-sample:1.0
+        image: {{DOCKERHUB_USERNAME}}/python-sample:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
