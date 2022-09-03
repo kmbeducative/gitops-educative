@@ -48,7 +48,7 @@ flux create kustomization podinfo \
   --source=podinfo \
   --path="./infrastructure" \
   --prune=true \
-  --interval=5m \
+  --interval=1m \
   --export > ./educative-cluster/podinfo-kustomization.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
