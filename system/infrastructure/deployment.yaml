@@ -3,4 +3,18 @@ kind: Deployment
 metadata:
   name: python-sample-deployment
 spec:
-# Insert declarative configuration here to complete the challenge
+  replicas: 5
+  selector:
+    matchLabels:
+      app: python-sample
+  template:
+    metadata:
+      labels:
+        app: python-sample
+    spec:
+      containers:
+      - name: python-sample
+        image: kmbeducative/python-sample:3.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
