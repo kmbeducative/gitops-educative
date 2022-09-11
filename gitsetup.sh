@@ -46,3 +46,15 @@ flux create source git challenge-source \
 git add .
 git commit -m "Adding the GitRepository"
 git push
+
+flux create kustomization challenge-kustomization \
+  --target-namespace=default \
+  --source=challenge-source \
+  --path="./infrastructure" \
+  --prune=true \
+  --interval=5m \
+  --export > ./educative-cluster/python-sample-kustomization.yaml
+
+git add .
+git commit -m "Adding the Kustomization"
+git push
