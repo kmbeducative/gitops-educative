@@ -1,6 +1,7 @@
 
 cd /usercode/system
 mv conf .gitignore
+mv helpers.tpl _helpers.tpl
 
 export GH_TOKEN={{GITHUB_PAT}}
 export GITHUB_TOKEN={{GITHUB_PAT}}
