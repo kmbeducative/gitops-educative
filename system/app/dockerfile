@@ -17,4 +17,4 @@ RUN pip3 -q --disable-pip-version-check install --user -r requirements.txt
 COPY . . 
 
 # Start the application and listen on all IPs
-CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD [ "waitress-serve", "--port=5000", "--call", "app:create_app"]
