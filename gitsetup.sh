@@ -37,7 +37,7 @@ cd /usercode/flux-infra
 flux create source git podinfo \
   --url=https://github.com/{{GITHUB_USERNAME}}/system \
   --branch=main \
-  --interval=30s \
+  --interval=15s \
   --export > ./educative-cluster/podinfo-source.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
@@ -48,7 +48,7 @@ flux create kustomization podinfo \
   --source=podinfo \
   --path="./infrastructure" \
   --prune=true \
-  --interval=1m \
+  --interval=15s \
   --export > ./educative-cluster/podinfo-kustomization.yaml
 
 git add -A && git commit -m "Add podinfo GitRepository"
