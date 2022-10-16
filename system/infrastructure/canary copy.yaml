@@ -1,0 +1,44 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: python-sample-service
+spec:
+  provider: traefik
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: python-sample-deployment 
+  autoscalerRef:
+    apiVersion: autoscaling/v2beta2
+    kind: HorizontalPodAutoscaler
+    name: python-sample-hpa
+  progressDeadlineSeconds: 60
+  service:
+    name: python-sample-service
+    port: 80
+    targetPort: 5000
+  analysis:
+    interval: 10s
+    threshold: 10
+    maxWeight: 50
+    stepWeight: 5
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99
+      interval: 2m
+    webhooks:
+      - name: acceptance-test
+        type: pre-rollout
+        url: http://flagger-loadtester.default/
+        timeout: 30s
+        metadata:
+          type: bash
+          cmd: "curl -s python-sample-service | grep ."
+      - name: load-test
+        url: http://flagger-loadtester.default/
+        timeout: 5s
+        metadata:
+          type: cmd
+          cmd: "hey -z 10m -q 10 -c 2 -host 192.168.64.2 http://traefik.traefik"
+          logCmdOutput: "true"

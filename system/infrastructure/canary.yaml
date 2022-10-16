@@ -1,0 +1,47 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: python-sample-service
+spec:
+  provider: nginx
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: python-sample-deployment
+  ingressRef:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    name: python-sample-ingress
+  autoscalerRef:
+    apiVersion: autoscaling/v2beta2
+    kind: HorizontalPodAutoscaler
+    name: python-sample-hpa
+  progressDeadlineSeconds: 60
+  service:
+    name: python-sample-service
+    port: 80
+    targetPort: 5000
+  analysis:
+    interval: 10s
+    threshold: 10
+    maxWeight: 50
+    stepWeight: 5
+    # NGINX Prometheus checks
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99
+      interval: 1m
+    webhooks:
+      - name: acceptance-test
+        type: pre-rollout
+        url: http://flagger-loadtester.default/
+        timeout: 30s
+        metadata:
+          type: bash
+          cmd: "curl -s python-sample-service-canary:80 | grep ."
+      - name: load-test
+        url: http://flagger-loadtester.flagger-exercise/
+        timeout: 5s
+        metadata:
+          cmd: "hey -z 1m -q 10 -c 2 http://127.29.0.2/"
