@@ -1,5 +1,7 @@
 #k3d cluster create --network host --no-lb -p "80:80" flagger-demo2
-k3d cluster create -p"80:80" flagger-demo
+k3d cluster create -p"80:80" flagger-another-try
+
+sleep 10 
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 kubectl create ns ingress-nginx
