@@ -25,7 +25,7 @@ spec:
     interval: 20s
     threshold: 10
     maxWeight: 50
-    stepWeight: 10
+    stepWeight: 25
     # NGINX Prometheus checks
     metrics:
     - name: request-success-rate
